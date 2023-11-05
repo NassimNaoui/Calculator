@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Architects+Daughter&family=Patrick+Hand&family=Roboto:wght@400;500&display=swap');
+
+body {
+    margin: 0;
+    background-color: #352F44;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 150px;
+}
+
+#result {
+    height: 75px;
+    width: 500px;
+    border: 1px solid #5C5470;
+    border-radius: 10px;
+}
+
+#result:hover {
+    background-color: #5C5470;
+}
+
+#keybord {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items:center;
+    height: 75px;
+    width: 300px;
+    gap : 10px;
+    margin: 10px;
+}
+
+#keybord .keycap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 90px;
+    background-color: #5C5470;
+    border: 1px solid #5C5470;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-size: smaller;
+    color: whitesmoke;
+}
+
+#keybord .keycap:hover {
+    background-color: #B9B4C7;
+    color: #352F44;
+}
