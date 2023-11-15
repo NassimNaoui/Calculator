@@ -13,17 +13,32 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 150px;
+    max-width: 500px;
+    padding: 250px;
 }
 
 #result {
-    height: 75px;
-    width: 500px;
-    border: 1px solid #5C5470;
-    border-radius: 10px;
+    display: flex;
+    
 }
 
-#result:hover {
+#display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: right;
+    height: 75px;
+    width: 500px;
+    padding: 5px;
+    background-color: #352F44;
+    border: 1px solid #5C5470;
+    border-radius: 10px;
+    font-family: Roboto;
+    color: whitesmoke;
+    font-size: 30px;
+}
+
+#display:hover {
     background-color: #5C5470;
 }
 
@@ -34,6 +49,7 @@ body {
     align-items: center;
     gap : 11px;
     margin: 5px;
+    padding-top: 5px;
 }
 
 #keyboard-mid {
@@ -63,8 +79,19 @@ body {
     border: 1px solid #5C5470;
     border-radius: 5px;
     font-family: Roboto;
-    font-size: smaller;
     color: whitesmoke;
+}
+
+#keyboard-left .keycap,
+#keyboard-right .keycap {
+    background-color: #B9B4C7;
+    color: #352F44;
+}
+
+#keyboard-left .keycap:hover,
+#keyboard-right .keycap:hover {
+    background-color: #FAF0E6;
+    color: #352F44;
 }
 
 .keycap:hover {

@@ -8,13 +8,6 @@ const operatorLeft = ['%',')','(','AC']
 const operatorRight = ['+','-','/','x']
 const operatorBottom = ['=','.',0]
 
-
-/*for (let index = 0; index < (4*5); index++) {
-    const digit = document.createElement('div');
-    digit.classList.add('keycap');
-    containerKeyBord.appendChild(digit); 
-}*/
-
 digitCodeSorted.forEach(digit => {
     const button = document.createElement('button');
     button.textContent = digit
@@ -43,3 +36,56 @@ operatorLeft.forEach(digit => {
     button.classList.add('keycap');
     containerKeyBordLeft.appendChild(button);
 });
+
+
+const add = function (a,b) {
+    return a + b;
+}
+
+const subtract = function(a,b) {
+    return a - b;
+}
+
+const multiply = function(a,b) {
+    return a * b;
+}
+
+const divide = function(a,b) {
+    return a / b;
+}
+
+
+var operator = multiply
+
+function operate (firstNumber,secondNumber) {
+    switch (operator) {
+        case add : return add(firstNumber,secondNumber);
+        break;
+        case subtract : return subtract(firstNumber,secondNumber);
+        break;
+        case multiply : return multiply(firstNumber,secondNumber);
+        break;
+        case divide : return divide(firstNumber,secondNumber);
+        break;
+        default:
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded',function() {
+
+        var display = document.getElementById('display');
+        var digitButton = document.querySelectorAll('#keyboard-mid .keycap');
+    
+    // displaying the first number
+    
+        digitButton.forEach(button => {
+            button.addEventListener('click', function() {
+                    display.value += button.textContent
+                    var number = display.value
+                    console.log(operate(number,5))
+            })
+        })
+    })
+
