@@ -9,7 +9,8 @@ body {
 }
 
 #main {
-    border: solid 3px black;
+    border: solid 3px rgb(77, 74, 74);
+    border-radius: 10px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -71,10 +72,12 @@ button {
     background-color: #ffffe4;
 }
 
-.operator {
+.operator,
+.equal {
     background-color: #bb8c8c;
 }
 
-.operator:hover {
+.operator:hover,
+.equal:hover {
     background-color: #e6adad;
 }

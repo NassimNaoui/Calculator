@@ -1,50 +1,92 @@
-const add = function (a,b) {
+const add = function (a, b) {
     return a + b;
 }
 
-const subtract = function(a,b) {
+const subtract = function (a, b) {
     return a - b;
 }
 
-const multiply = function(a,b) {
+const multiply = function (a, b) {
     return a * b;
 }
 
-const divide = function(a,b) {
+const divide = function (a, b) {
     return a / b;
 }
 
 
-var operator = multiply
-
-function operate (firstNumber,secondNumber) {
+function operate(firstNumber, operator, secondNumber) {
     switch (operator) {
-        case add : return add(firstNumber,secondNumber);
-        break;
-        case subtract : return subtract(firstNumber,secondNumber);
-        break;
-        case multiply : return multiply(firstNumber,secondNumber);
-        break;
-        case divide : return divide(firstNumber,secondNumber);
-        break;
+        case '+': return add(firstNumber, secondNumber);
+            break;
+        case '-': return subtract(firstNumber, secondNumber);
+            break;
+        case '*': return multiply(firstNumber, secondNumber);
+            break;
+        case '/': return divide(firstNumber, secondNumber);
+            break;
         default:
     }
 }
 
-document.addEventListener('DOMContentLoaded',function() {
+var display = document.getElementById('display');
+var digitButton = document.querySelectorAll('.digit');
+var operatorButton = document.querySelectorAll('.operator');
+var functionButton = document.querySelectorAll('.function');
+var equalButton = document.querySelectorAll('.equal');
 
-        var display = document.getElementById('display');
-        var digitButton = document.querySelectorAll('.digit');
 
 
-            digitButton.forEach(button => {
-                button.addEventListener('click', function() {
-                    display.innerHTML = '';
-                        display.innerHTML += button.textContent
-                        var number = display.textContent
-                        console.log(operate(number,5))
-                })
-            })
-    
+digitButton.forEach(button => {
+    button.addEventListener('click', function () {
+        if (display.textContent === '0') {
+            display.textContent = '';
+            display.textContent = button.textContent;
+            firstNumber = display.textContent;
+            console.log(firstNumber)
+        }
+        else {
+            display.textContent += button.textContent;
+            firstNumber = display.textContent;
+            console.log(firstNumber)
+        }
     })
+    button.addEventListener('click', function () {
+        operator = button.textContent;
 
+        digitButton.forEach(button => {
+            button.addEventListener('click', function () {
+                display.textContent = '';
+                display.textContent += button.textContent;
+                secondNumber = display.textContent;
+                console.log(secondNumber)
+            })
+        })
+    })
+})
+
+equalButton.forEach(button => {
+    button.addEventListener('click', function () {
+        console.log(operate(firstNumber, operator, secondNumber));
+    })
+})
+
+
+
+// operatorButton.forEach(button => {
+//     button.addEventListener('click', function () {
+//         const operator = button.textContent;
+//     })
+// })
+
+functionButton.forEach(button => {
+    button.addEventListener('click', function () {
+        switch (button.textContent) {
+            case 'AC': display.innerHTML = 0;
+                break;
+            case '+/-': display.innerHTML *= -1;
+                break;
+            case '%': display.innerHTML /= 100;
+        }
+    })
+})
