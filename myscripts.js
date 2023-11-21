@@ -42,7 +42,7 @@ digitButton.forEach(button => {
         if (display.textContent === '0') {
             display.textContent = '';
             display.textContent = button.textContent;
-            firstNumber = display.textContent;
+            firstNumber = parseInt(display.textContent);
             console.log(firstNumber)
         }
         else {
@@ -51,42 +51,44 @@ digitButton.forEach(button => {
             console.log(firstNumber)
         }
     })
-    button.addEventListener('click', function () {
-        operator = button.textContent;
+    operatorButton.forEach(operatorButton => {
+        operatorButton.addEventListener('click', function () {
+            operator = operatorButton.textContent;
 
-        digitButton.forEach(button => {
-            button.addEventListener('click', function () {
-                display.textContent = '';
-                display.textContent += button.textContent;
-                secondNumber = display.textContent;
-                console.log(secondNumber)
+            digitButton.forEach(button => {
+                button.addEventListener('click', function () {
+                    display.textContent = '';
+                    display.textContent += button.textContent;
+                    secondNumber = parseInt(display.textContent);
+                    console.log(secondNumber)
+                })
             })
         })
     })
 })
 
-equalButton.forEach(button => {
-    button.addEventListener('click', function () {
-        console.log(operate(firstNumber, operator, secondNumber));
+    equalButton.forEach(button => {
+        button.addEventListener('click', function () {
+            console.log(operate(parseInt(firstNumber), operator, parseInt(secondNumber)));
+        })
     })
-})
 
 
 
-// operatorButton.forEach(button => {
-//     button.addEventListener('click', function () {
-//         const operator = button.textContent;
-//     })
-// })
+    // operatorButton.forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         const operator = button.textContent;
+    //     })
+    // })
 
-functionButton.forEach(button => {
-    button.addEventListener('click', function () {
-        switch (button.textContent) {
-            case 'AC': display.innerHTML = 0;
-                break;
-            case '+/-': display.innerHTML *= -1;
-                break;
-            case '%': display.innerHTML /= 100;
-        }
+    functionButton.forEach(button => {
+        button.addEventListener('click', function () {
+            switch (button.textContent) {
+                case 'AC': display.innerHTML = 0;
+                    break;
+                case '+/-': display.innerHTML *= -1;
+                    break;
+                case '%': display.innerHTML /= 100;
+            }
+        })
     })
-})
