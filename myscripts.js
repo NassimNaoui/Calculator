@@ -14,7 +14,6 @@ const divide = function (a, b) {
     return a / b;
 }
 
-
 function operate(firstNumber, operator, secondNumber) {
     switch (operator) {
         case '+': return add(firstNumber, secondNumber);
@@ -35,30 +34,11 @@ const operatorButton = document.querySelectorAll('.operator');
 const functionButton = document.querySelectorAll('.function');
 const equalButton = document.querySelectorAll('.equal');
 const contentDisplay = document.createElement('div');
-const contentDisplay2 = document.createElement('div');
-const displayFirstNumber = document.querySelectorAll('firstNumber');
-const displaySecondNumber = document.querySelectorAll('secondNumber');
 
 var firstNumber = '';
 var isFirstNumberNotCompleted = true;
 var operator = '';
 var secondNumber = '';
-
-
-
-function typingEqual(previousFirstNumber) {
-    equalButton.forEach(button => {
-        button.addEventListener('click', function () {
-            display.textContent = '';
-            result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
-            contentDisplay.textContent = result;
-            display.appendChild(contentDisplay);
-            console.log(result);
-        });
-    });
-}
-
-
 
 function typingNumber() {
     digitButton.forEach(button => {
@@ -76,7 +56,6 @@ function typingNumber() {
     }
 }
 
-
 function handleNumberClick(event) {
     display.textContent = '';
     firstNumber += event.target.textContent;
@@ -87,7 +66,6 @@ function handleNumberClick(event) {
     typingOperator();
 }
 
-
 function handleSecondNumberClick(event) {
     display.textContent = '';
     secondNumber += event.target.textContent;
@@ -95,8 +73,8 @@ function handleSecondNumberClick(event) {
     contentDisplay.textContent = secondNumber;
     display.appendChild(contentDisplay);
     console.log('2nd Nb:', secondNumber);
-    typingOperator();
 }
+
 
 function typingOperator() {
     operatorButton.forEach(button => {
@@ -104,12 +82,53 @@ function typingOperator() {
             isFirstNumberNotCompleted = false;
             operator = button.textContent;
             console.log('operator :', operator);
+            isOperatorCompleted = true;
             typingNumber();
         });
     });
 }
 
+function typingEqual() {
+    equalButton.forEach(button => {
+        button.addEventListener('click', function () {
+            display.textContent = '';
+            result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
+            contentDisplay.textContent = result;
+            display.appendChild(contentDisplay);
+            console.log(result);
+        });
+    });
+}
+
+functionButton.forEach(button => {
+    button.addEventListener('click', function () {
+        switch (button.textContent) {
+            case 'AC': location.reload()
+                break;
+            case '+/-': if (isFirstNumberNotCompleted) {
+                firstNumber *= -1
+                contentDisplay.textContent = firstNumber;
+                console.log(firstNumber);
+            } else {
+                secondNumber *= -1;
+                contentDisplay.textContent = secondNumber;
+                console.log(secondNumber);
+            }
+                break;
+            case '%': if (isFirstNumberNotCompleted) {
+                firstNumber /= 100;
+                contentDisplay.textContent = firstNumber;
+                console.log(firstNumber);
+            } else {
+                secondNumber /= 100;
+                contentDisplay.textContent = secondNumber;
+                console.log(secondNumber);
+            }
+                break;
+        }
+    })
+})
+
 typingNumber();
 typingEqual();
-
 
