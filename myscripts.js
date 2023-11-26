@@ -39,88 +39,77 @@ const contentDisplay2 = document.createElement('div');
 const displayFirstNumber = document.querySelectorAll('firstNumber');
 const displaySecondNumber = document.querySelectorAll('secondNumber');
 
-//// code initial
+var firstNumber = '';
+var isFirstNumberNotCompleted = true;
+var operator = '';
+var secondNumber = '';
 
-var typingOperatorNotCalled = true;
 
 
-function typingFirstnumber() {
-    firstNumber = ''
-    digitButton.forEach(button => {
+function typingEqual(previousFirstNumber) {
+    equalButton.forEach(button => {
         button.addEventListener('click', function () {
             display.textContent = '';
-            firstNumber += button.textContent;
-            contentDisplay.classList.add('firstNumber');
-            contentDisplay.textContent = firstNumber;
-            display.appendChild(contentDisplay)
-            console.log('1er Nb:', firstNumber);
-            typingOperator();
-        })
-    })
+            result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
+            contentDisplay.textContent = result;
+            display.appendChild(contentDisplay);
+            console.log(result);
+        });
+    });
 }
 
-// function typingFirstnumberReverse() {
-//     // firstNumber = contentDisplay.textContent
-//     digitButton.forEach(button => {
-//         button.addEventListener('click', function () {
-//             displayFirstNumber.remove();
-//         })
-//     })
-// }
 
 
-function typingOperator(operator) {
-    typingOperatorNotCalled = false;
-    operator = ''
+function typingNumber() {
+    digitButton.forEach(button => {
+        button.removeEventListener('click', handleNumberClick);
+    });
+
+    if (isFirstNumberNotCompleted) {
+        digitButton.forEach(button => {
+            button.addEventListener('click', handleNumberClick);
+        });
+    } else {
+        digitButton.forEach(button => {
+            button.addEventListener('click', handleSecondNumberClick);
+        });
+    }
+}
+
+
+function handleNumberClick(event) {
+    display.textContent = '';
+    firstNumber += event.target.textContent;
+    contentDisplay.classList.add('firstNumber');
+    contentDisplay.textContent = firstNumber;
+    display.appendChild(contentDisplay);
+    console.log('1er Nb:', firstNumber);
+    typingOperator();
+}
+
+
+function handleSecondNumberClick(event) {
+    display.textContent = '';
+    secondNumber += event.target.textContent;
+    contentDisplay.classList.add('secondNumber');
+    contentDisplay.textContent = secondNumber;
+    display.appendChild(contentDisplay);
+    console.log('2nd Nb:', secondNumber);
+    typingOperator();
+}
+
+function typingOperator() {
     operatorButton.forEach(button => {
         button.addEventListener('click', function () {
+            isFirstNumberNotCompleted = false;
             operator = button.textContent;
             console.log('operator :', operator);
-            typingSecondnumber();
-        })
-    })
+            typingNumber();
+        });
+    });
 }
 
-function typingSecondnumber(secondNumber) {
-    secondNumber = ''
-    digitButton.forEach(button => {
-        button.addEventListener('click', function () {
-            if (contentDisplay) {
-                display.removeChild(contentDisplay);
-            } else {
-                secondNumber += button.textContent;
-                contentDisplay2.classList.add('secondNumber');
-                contentDisplay2.textContent = secondNumber;
-                display.appendChild(contentDisplay2)
-                console.log('2nd Nb :', secondNumber);
-            }
-        })
-    })
-}
-
-typingFirstnumber()
-
-/// autres fonctions du code initial
-
-// operatorButton.forEach(operatorButton => {
-//         operatorButton.addEventListener('click', function () {
-//             operator = operatorButton.textContent;
+typingNumber();
+typingEqual();
 
 
-// equalButton.forEach(button => {
-//         button.addEventListener('click', function () {
-//             console.log(operate(parseInt(firstNumber), operator, parseInt(secondNumber)));
-//         })
-//  })
-
-//  functionButton.forEach(button => {
-//         button.addEventListener('click', function () {
-//             switch (button.textContent) {
-//                 case 'AC': display.innerHTML = 0;
-//                     break;
-//                 case '+/-': display.innerHTML *= -1;
-//                     break;
-//                 case '%': display.innerHTML /= 100;
-//             }
-//         })
-//  })
