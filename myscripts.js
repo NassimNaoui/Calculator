@@ -70,7 +70,7 @@ function handleNumberClick(event) {
     contentDisplay.classList.add('firstNumber');
     contentDisplay.textContent = firstNumber
     display.appendChild(contentDisplay);
-    console.log('1er Nb:', firstNumber)
+    // console.log('1er Nb:', firstNumber)
 }
 
 function handleSecondNumberClick(event) {
@@ -81,7 +81,7 @@ function handleSecondNumberClick(event) {
     contentDisplay.classList.add('secondNumber');
     contentDisplay.textContent = secondNumber;
     display.appendChild(contentDisplay);
-    console.log('2nd Nb:', secondNumber);
+    // console.log('2nd Nb:', secondNumber);
 }
 
 
@@ -98,10 +98,10 @@ function typingOperator() {
             if (firstNumber.length > 0 && secondNumber.length > 0) {
                 result = operate(parseFloat(firstNumber), operator[(operator.length - 2)], parseFloat(secondNumber));
                 firstNumber[0] = result
-                console.log('1er Nb:', firstNumber)
+                // console.log('1er Nb:', firstNumber)
                 contentDisplay.textContent = result;
                 display.appendChild(contentDisplay);
-                console.log(result);
+                // console.log(result);
             } else {
                 typingNumber();
             }
@@ -119,7 +119,7 @@ function typingEqual() {
             secondNumber = [];
             contentDisplay.textContent = result;
             display.appendChild(contentDisplay);
-            console.log(result);
+            // console.log(result);
             }
         });
     });
@@ -133,21 +133,21 @@ functionButton.forEach(button => {
             case '+/-': if (isFirstNumberNotCompleted) {
                 firstNumber *= -1
                 contentDisplay.textContent = firstNumber;
-                console.log(firstNumber);
+                // console.log(firstNumber);
             } else {
                 secondNumber *= -1;
                 contentDisplay.textContent = secondNumber;
-                console.log(secondNumber);
+                // console.log(secondNumber);
             }
                 break;
             case '%': if (isFirstNumberNotCompleted) {
                 firstNumber /= 100;
                 contentDisplay.textContent = firstNumber;
-                console.log(firstNumber);
+                // console.log(firstNumber);
             } else {
                 secondNumber /= 100;
                 contentDisplay.textContent = secondNumber;
-                console.log(secondNumber);
+                // console.log(secondNumber);
             }
                 break;
         }
