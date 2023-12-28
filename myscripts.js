@@ -35,10 +35,12 @@ const functionButton = document.querySelectorAll('.function');
 const equalButton = document.querySelectorAll('.equal');
 const contentDisplay = document.createElement('div');
 
-var firstNumber = '';
+let dataStored = [];
+let firstNumber = [];
+let secondNumber = [];
+let numbers = [];
+let operator = [];
 var isFirstNumberNotCompleted = true;
-var operator = '';
-var secondNumber = '';
 
 function typingNumber() {
     digitButton.forEach(button => {
@@ -56,19 +58,26 @@ function typingNumber() {
     }
 }
 
+function addNumbers(arr) {
+    arr.push(event.target.textContent);
+}
+
 function handleNumberClick(event) {
     display.textContent = '';
-    firstNumber += event.target.textContent;
+    addNumbers(dataStored);
+    firstNumber.push(dataStored.join(""));
+    firstNumber = firstNumber.slice((firstNumber.length -1))
     contentDisplay.classList.add('firstNumber');
-    contentDisplay.textContent = firstNumber;
+    contentDisplay.textContent = firstNumber
     display.appendChild(contentDisplay);
-    console.log('1er Nb:', firstNumber);
-    typingOperator();
+    console.log('1er Nb:', firstNumber)
 }
 
 function handleSecondNumberClick(event) {
     display.textContent = '';
-    secondNumber += event.target.textContent;
+    addNumbers(dataStored);
+    secondNumber.push(dataStored.join(""));
+    secondNumber = secondNumber.slice((secondNumber.length -1))
     contentDisplay.classList.add('secondNumber');
     contentDisplay.textContent = secondNumber;
     display.appendChild(contentDisplay);
@@ -79,11 +88,23 @@ function handleSecondNumberClick(event) {
 function typingOperator() {
     operatorButton.forEach(button => {
         button.addEventListener('click', function () {
+            dataStored = [];
             isFirstNumberNotCompleted = false;
-            operator = button.textContent;
+            operator.push(button.textContent);
             console.log('operator :', operator);
+            console.log('firstNumber.length :', firstNumber.length);
+            console.log('secondNumber.length :', secondNumber.length);
             isOperatorCompleted = true;
-            typingNumber();
+            if (firstNumber.length > 0 && secondNumber.length > 0) {
+                result = operate(parseFloat(firstNumber), operator[(operator.length - 2)], parseFloat(secondNumber));
+                firstNumber[0] = result
+                console.log('1er Nb:', firstNumber)
+                contentDisplay.textContent = result;
+                display.appendChild(contentDisplay);
+                console.log(result);
+            } else {
+                typingNumber();
+            }
         });
     });
 }
@@ -91,11 +112,15 @@ function typingOperator() {
 function typingEqual() {
     equalButton.forEach(button => {
         button.addEventListener('click', function () {
+            if (display.textContent != 0) {
             display.textContent = '';
-            result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber));
+            result = operate(parseFloat(firstNumber), operator[(operator.length - 1)], parseFloat(secondNumber));
+            firstNumber[0] = result;
+            secondNumber = [];
             contentDisplay.textContent = result;
             display.appendChild(contentDisplay);
             console.log(result);
+            }
         });
     });
 }
@@ -129,6 +154,8 @@ functionButton.forEach(button => {
     })
 })
 
+
 typingNumber();
+typingOperator();
 typingEqual();
 
